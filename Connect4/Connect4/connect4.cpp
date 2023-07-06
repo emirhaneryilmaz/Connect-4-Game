@@ -544,3 +544,141 @@ void StartNewGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10]
 
 
 }
+
+void ContinueLastGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10], int dropChoice, int win, int full, int again, int dropLocation, int dropRow, std::string nameParam, std::string moveParam) {
+	ifstream file("hamle.txt");
+	string line, lastLine, secondLastLine;
+
+	if (file.is_open()) {
+		while (getline(file, line)) {
+			secondLastLine = lastLine;
+			lastLine = line;
+		}
+
+		file.close();
+
+		// Assigning playerOneName and playerTwoName by parsing the last two lines
+		size_t delimiterPos = secondLastLine.find("->");
+		string playerOneName = secondLastLine.substr(0, delimiterPos);
+		string playerTwoName = lastLine.substr(0, delimiterPos);
+		strcpy_s(playerOne.playerName, playerOneName.c_str());
+		strcpy_s(playerTwo.playerName, playerTwoName.c_str());
+
+
+		playerOne.playerID = 'X';
+		playerTwo.playerID = 'O';
+
+		DisplayBoard(board);
+
+		do
+
+		{
+
+			dropLocation = PlayerDrop(board, playerOne);
+			dropRow = dropLocation / 10;
+			dropChoice = dropLocation % 10;
+			nameParam = playerOne.playerName + string("->");
+			moveParam = to_string(dropRow) + to_string(dropChoice);
+
+
+			CheckBelow(board, playerOne, dropChoice);
+			DisplayBoard(board);
+			RecordMoveToFile("hamle.txt", nameParam + moveParam);
+
+			win = CheckFour(board, playerOne);
+
+			if (win == 1)
+			{
+				PlayerWin(playerOne);
+				break;
+			}
+
+			dropLocation = PlayerDrop(board, playerTwo);
+			dropRow = dropLocation / 10;
+			dropChoice = dropLocation % 10;
+			nameParam = playerTwo.playerName + string("->");
+			moveParam = to_string(dropRow) + to_string(dropChoice);
+
+			CheckBelow(board, playerTwo, dropChoice);
+			DisplayBoard(board);
+			RecordMoveToFile("hamle.txt", nameParam + moveParam);
+
+
+			win = CheckFour(board, playerTwo);
+
+			if (win == 1)
+
+			{
+				PlayerWin(playerTwo);
+				break;
+			}
+
+
+			full = FullBoard(board);
+
+
+			if (full == 9)
+
+			{
+
+				cout << "Board full, draw!" << endl;
+				break;
+
+			}
+
+			// Option to stop the game
+
+			cout << "Press the 'ESC' key to stop the game. Press another key to continue: " << endl;
+
+
+			while (true) {
+				if (_kbhit()) {  // Check if any key has been pressed on the keyboard
+					char key = _getch();  // Get pressed key
+					if (key == 27) {  // Check ESC key
+						cout << "The game has been paused!" << endl;
+
+
+						cout << "Press 2 to restart the game. Press another key to exit: " << endl;
+
+						char key2 = _getch();  // Get pressed key
+
+						if (key2 == 50)
+
+						{
+							// Game restart procedures
+							for (int i = 1; i <= 9; i++)
+							{
+								for (int ix = 1; ix <= 9; ix++)
+								{
+									board[i][ix] = '*';
+								}
+							}
+
+							main(); // restart the game by calling main function again
+						}
+
+						else
+
+						{
+							cout << "Goodbye!" << endl;
+							exit(0);
+							break;
+						}
+
+					}
+					else
+						break;
+
+				}
+
+			}
+
+
+		} while (true);
+
+	}
+	else {
+		cout << "The file could not be opened." << endl;
+	}
+
+}
