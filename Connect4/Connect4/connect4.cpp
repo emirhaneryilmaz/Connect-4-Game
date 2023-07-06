@@ -132,7 +132,6 @@ int PlayerDrop(char board[][10], playerInfo activePlayer)
 
 }
 
-
 void CheckBelow(char board[][10], playerInfo activePlayer, int dropChoice)
 
 {
