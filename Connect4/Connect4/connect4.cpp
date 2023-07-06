@@ -337,3 +337,32 @@ void PlayerWin(playerInfo activePlayer)
 {
 	cout << endl << activePlayer.playerName << " WON!" << endl;
 }
+
+int restart(char board[][10])
+
+{
+
+	int restart;
+
+	cout << "Do you want to restart the game? Yes(1) No(2): ";
+
+	cin >> restart;
+	if (restart == 1)
+
+	{
+		for (int i = 1; i <= 9; i++)
+		{
+			for (int j = 1; j <= 9; j++)
+			{
+				board[i][j] = '*';
+			}
+		}
+	}
+
+	else
+
+		cout << "Goodbye!" << endl;
+
+	return restart;
+
+}
