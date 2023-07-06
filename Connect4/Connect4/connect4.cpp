@@ -152,3 +152,51 @@ void CheckBelow(char board[][10], playerInfo activePlayer, int dropChoice)
 			--length;
 	} while (turn != 1);
 }
+
+void DisplayBoard(char board[][10])
+
+{
+
+	int rows = 9, columns = 9, i, j;
+
+	// Open the file
+
+	ofstream file("tahta.txt");
+
+	for (i = 1; i <= rows; i++)
+
+	{
+
+		cout << "|";
+
+		file << "|";
+
+
+
+		for (j = 1; j <= columns; j++)
+
+		{
+
+			if (board[i][j] != 'X' && board[i][j] != 'O')
+
+				board[i][j] = '*';
+
+
+
+			cout << board[i][j];
+
+			file << board[i][j];
+
+		}
+		cout << "|" << endl;
+
+		file << "|" << endl;
+
+	}
+
+
+	// Close the file
+
+	file.close();
+
+}
