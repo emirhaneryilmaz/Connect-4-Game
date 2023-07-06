@@ -398,3 +398,18 @@ void ReadBoardFromFile(char board[][10]) {
 	}
 
 }
+
+void RecordMoveToFile(const string& filename, const string& move)
+{
+	ofstream file(filename, ios::app);
+
+	if (file.is_open())
+	{
+		file << move << endl;
+		file.close();
+	}
+	else
+	{
+		cout << "Could not open the file." << endl;
+	}
+}
