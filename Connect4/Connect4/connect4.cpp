@@ -331,3 +331,9 @@ int FullBoard(char board[][10])
 	return full;
 
 }
+
+void PlayerWin(playerInfo activePlayer)
+
+{
+	cout << endl << activePlayer.playerName << " WON!" << endl;
+}
