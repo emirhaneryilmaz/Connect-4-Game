@@ -34,7 +34,7 @@ The game board logs are displayed as a visual representation of the current stat
 ## Player Moves Log
 The player moves log shows the sequence of moves made by each player during the game. Each move is displayed as the column number where the player placed their disc.
 
-![Player Moves Log](Connect4/Connect4/images/moves.png)
+![Player Moves Log](Connect4/Connect4/images/playermoves.png)
 
 *Player Moves Log: Sequence of moves made by each player.*
 
