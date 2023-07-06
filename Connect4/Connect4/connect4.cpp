@@ -199,3 +199,119 @@ void DisplayBoard(char board[][10])
 	file.close();
 
 }
+
+int CheckFour(char board[][10], playerInfo activePlayer)
+
+{
+
+	char XO;
+	int win;
+	XO = activePlayer.playerID;
+	win = 0;
+
+	// Vertical
+
+	for (int i = 9; i >= 1; i--)
+
+	{
+
+		for (int j = 9; j >= 1; j--)
+
+		{
+
+			if (board[i][j] == XO && //9,9 9,9 9,5... 9,1
+
+				board[i - 1][j] == XO && //5,9 ... .5,1
+
+				board[i - 2][j] == XO && //4,9 .... 4,1
+
+				board[i - 3][j] == XO) //3,9 ... 3,1
+
+				return 1;
+
+		}
+
+	}
+
+
+
+	// Horizontal
+
+	for (int i = 9; i >= 1; i--)
+
+	{
+		for (int j = 9; j >= 1; j--)
+
+		{
+
+			if (board[i][j] == activePlayer.playerID &&
+
+				board[i][j - 1] == activePlayer.playerID &&
+
+				board[i][j - 2] == activePlayer.playerID &&
+
+				board[i][j - 3] == activePlayer.playerID)
+
+				return 1;
+
+		}
+
+	}
+
+
+
+	// Cross check (top left to bottom right)
+
+	for (int i = 1; i <= 9; i++)
+
+	{
+
+		for (int j = 1; j <= 9; j++)
+
+		{
+
+			if (board[i][j] == XO &&
+
+				board[i + 1][j + 1] == XO &&
+
+				board[i + 2][j + 2] == XO &&
+
+				board[i + 3][j + 3] == XO)
+
+				return 1;
+
+		}
+
+	}
+
+
+
+	// Cross check (bottom left to top right)
+
+	for (int i = 9; i >= 1; i--)
+
+	{
+
+		for (int j = 1; j <= 9; j++)
+
+		{
+
+			if (board[i][j] == XO && // 9,1
+
+				board[i - 1][j + 1] == XO && // 5,2
+
+				board[i - 2][j + 2] == XO && //4,3
+
+				board[i - 3][j + 3] == XO) // 3,4
+
+				return 1;
+
+		}
+
+	}
+
+
+
+	return win;
+
+}
