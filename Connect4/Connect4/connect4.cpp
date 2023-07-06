@@ -36,6 +36,7 @@ void StartNewGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10]
 
 void ContinueLastGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10], int dropChoice, int win, int full, int again, int dropLocation, int dropRow, std::string nameParam, std::string moveParam);
 
+//Main 
 int main() {
 	playerInfo playerOne{};
 	playerInfo playerTwo{};
@@ -60,7 +61,7 @@ int main() {
 
 
 	if (choice == 1) {
-		ofstream file("hamle.txt", ios::out | ios::trunc);
+		ofstream file("moves.txt", ios::out | ios::trunc);
 		file.close();
 		StartNewGame(playerOne, playerTwo, board, trueWidth, trueLength, dropChoice, win, full, again, dropLocation, dropRow, nameParam, moveParam);
 
@@ -84,7 +85,7 @@ int main() {
 	return 0;
 }
 
-
+// Functions
 int PlayerDrop(char board[][10], playerInfo activePlayer)
 
 {
@@ -160,7 +161,7 @@ void DisplayBoard(char board[][10])
 
 	// Open the file
 
-	ofstream file("tahta.txt");
+	ofstream file("board.txt");
 
 	for (i = 1; i <= rows; i++)
 
@@ -369,7 +370,7 @@ int restart(char board[][10])
 
 void ReadBoardFromFile(char board[][10]) {
 
-	ifstream file("tahta.txt");
+	ifstream file("board.txt");
 
 	if (file.is_open()) {
 
@@ -449,7 +450,7 @@ void StartNewGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10]
 
 		CheckBelow(board, playerOne, dropChoice);
 		DisplayBoard(board);
-		RecordMoveToFile("hamle.txt", nameParam + moveParam);
+		RecordMoveToFile("moves.txt", nameParam + moveParam);
 
 		win = CheckFour(board, playerOne);
 
@@ -467,7 +468,7 @@ void StartNewGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10]
 
 		CheckBelow(board, playerTwo, dropChoice);
 		DisplayBoard(board);
-		RecordMoveToFile("hamle.txt", nameParam + moveParam);
+		RecordMoveToFile("moves.txt", nameParam + moveParam);
 
 
 		win = CheckFour(board, playerTwo);
@@ -546,7 +547,7 @@ void StartNewGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10]
 }
 
 void ContinueLastGame(playerInfo playerOne, playerInfo playerTwo, char board[10][10], int dropChoice, int win, int full, int again, int dropLocation, int dropRow, std::string nameParam, std::string moveParam) {
-	ifstream file("hamle.txt");
+	ifstream file("moves.txt");
 	string line, lastLine, secondLastLine;
 
 	if (file.is_open()) {
@@ -583,7 +584,7 @@ void ContinueLastGame(playerInfo playerOne, playerInfo playerTwo, char board[10]
 
 			CheckBelow(board, playerOne, dropChoice);
 			DisplayBoard(board);
-			RecordMoveToFile("hamle.txt", nameParam + moveParam);
+			RecordMoveToFile("moves.txt", nameParam + moveParam);
 
 			win = CheckFour(board, playerOne);
 
@@ -601,7 +602,7 @@ void ContinueLastGame(playerInfo playerOne, playerInfo playerTwo, char board[10]
 
 			CheckBelow(board, playerTwo, dropChoice);
 			DisplayBoard(board);
-			RecordMoveToFile("hamle.txt", nameParam + moveParam);
+			RecordMoveToFile("moves.txt", nameParam + moveParam);
 
 
 			win = CheckFour(board, playerTwo);
