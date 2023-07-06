@@ -5,6 +5,13 @@
 
 using namespace std;
 
+struct playerInfo
+
+{
+	char playerName[81];
+	char playerID;
+};
+
 int main() {
 	cout << "hello";
 }
