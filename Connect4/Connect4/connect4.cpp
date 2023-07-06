@@ -366,3 +366,35 @@ int restart(char board[][10])
 	return restart;
 
 }
+
+void ReadBoardFromFile(char board[][10]) {
+
+	ifstream file("tahta.txt");
+
+	if (file.is_open()) {
+
+		string line;
+
+		int row = 1;
+
+		while (getline(file, line)) {
+
+			if (line.length() >= 10) {
+
+				for (int col = 1; col <= 9; col++) {
+
+					board[row][col] = line[col];
+
+				}
+
+				row++;
+
+			}
+
+		}
+
+		file.close();
+
+	}
+
+}
