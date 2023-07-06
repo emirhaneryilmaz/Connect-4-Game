@@ -83,3 +83,51 @@ int main() {
 
 	return 0;
 }
+
+
+int PlayerDrop(char board[][10], playerInfo activePlayer)
+
+{
+
+	int dropChoice;
+	int dropRow;
+	int dropLocation;
+	do
+
+	{
+
+		cout << activePlayer.playerName << "'s Turn ";
+
+		cout << "Please enter a number between 1 and 9: ";
+
+		cin >> dropChoice;
+
+
+
+		if (!(dropChoice >= 1 && dropChoice <= 9)) {
+
+			cout << "You entered an invalid number!" << " Please enter a number between 1 and 9." << endl;
+
+			cin >> dropChoice;
+
+		}
+
+
+		// Find the first available row in the selected column
+		dropRow = 9;
+		while (board[dropRow][dropChoice] != '*')
+		{
+			dropRow--;
+			if (dropRow == 0)
+			{
+				cout << "This column is full. Please enter a number for an empty column. " << endl;
+				break;
+			}
+		}
+	} while (!(dropChoice >= 1 && dropChoice <= 9) || dropRow == 0);
+
+
+	dropLocation = dropRow * 10 + dropChoice;
+	return dropLocation;  // To return the row and column as a single value
+
+}
