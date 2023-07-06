@@ -315,3 +315,19 @@ int CheckFour(char board[][10], playerInfo activePlayer)
 	return win;
 
 }
+
+int FullBoard(char board[][10])
+
+{
+
+	int full;
+	full = 0;
+	for (int i = 1; i <= 9; ++i)
+	{
+		if (board[1][i] != '*')
+			++full;
+	}
+
+	return full;
+
+}
