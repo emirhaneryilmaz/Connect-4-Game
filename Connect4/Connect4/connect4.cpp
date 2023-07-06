@@ -16,7 +16,7 @@ struct playerInfo
 //Function Prototypes
 int PlayerDrop(char board[][10], playerInfo activePlayer);
 
-void CheckBellow(char board[][10], playerInfo activePlayer, int dropChoice);
+void CheckBelow(char board[][10], playerInfo activePlayer, int dropChoice);
 
 void DisplayBoard(char board[][10]);
 
@@ -130,4 +130,25 @@ int PlayerDrop(char board[][10], playerInfo activePlayer)
 	dropLocation = dropRow * 10 + dropChoice;
 	return dropLocation;  // To return the row and column as a single value
 
+}
+
+
+void CheckBelow(char board[][10], playerInfo activePlayer, int dropChoice)
+
+{
+
+	int length, turn;
+	length = 9;
+	turn = 0;
+
+	do
+	{
+		if (board[length][dropChoice] != 'X' && board[length][dropChoice] != 'O')
+		{
+			board[length][dropChoice] = activePlayer.playerID;
+			turn = 1;
+		}
+		else
+			--length;
+	} while (turn != 1);
 }
